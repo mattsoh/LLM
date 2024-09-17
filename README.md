@@ -17,7 +17,7 @@ To set up your environment and install the necessary dependencies for this proje
    pip --version
    ```
 3. **Download `model.pth`**:
-   Download `model.pth` from https://drive.google.com/file/d/1mkhifEI6HQoiVahnGgZaRYsVU23req_M/view?usp=sharing. Then insert it into the LLM folder.
+   Download `model.pth` from https://drive.google.com/file/d/1mkhifEI6HQoiVahnGgZaRYsVU23req_M. Then insert it into the LLM folder.
 4. **Run**:
    ```
    pip install -r requirements.txt
