@@ -4,14 +4,23 @@ According to ChatGPT, do this:
 ### Installing Dependencies
 
 To set up your environment and install the necessary dependencies for this project, follow these steps:
-
-1. **Ensure Python and `pip` are installed**:
+1. **Clone Project**:
+   Run
+   ```
+   git clone https://github.com/mattsoh/LLM.git
+   cd LLM
+   ```
+2. **Ensure Python and `pip` are installed**:
    Make sure you have Python and `pip` installed on your system. You can check this by running:
    ```
    python --version
    pip --version
    ```
-2. **Run**:
+3. **Download `model.pth`**:
+   Download `model.pth` from https://drive.google.com/file/d/1mkhifEI6HQoiVahnGgZaRYsVU23req_M/view?usp=sharing. Then insert it into the LLM folder.
+4. **Run**:
    ```
    pip install -r requirements.txt
+   python generate.py
    ```
+   
