@@ -1,6 +1,8 @@
 import torch
 import tiktoken
-from helper import generate_and_print_sample, text_to_token_ids, token_ids_to_text, generate, GPT
+import gdown
+import os
+from helper import generate_and_print_sample, GPT
 
 GPT_CONFIG = {
     "vocab_size": 50257,
@@ -14,6 +16,19 @@ GPT_CONFIG = {
 
 MODEL_PATH = "model.pth"
 
+
+FILE_ID = "1mkhifEI6HQoiVahnGgZaRYsVU23req_M"
+MODEL_PATH = "model.pth"
+
+if not os.path.exists(MODEL_PATH):
+    try:
+        print("Downloading model.pth from Google Drive...")
+        url = f"https://drive.google.com/uc?id={FILE_ID}"
+        gdown.download(url, MODEL_PATH, quiet=False, verify=False)
+        print("Download completed.")
+    except Exception as e:
+        print(f"Error downloading model.pth: {e}")
+    
 device = torch.device("cpu")
 model = GPT(GPT_CONFIG)
 model.to(device)
