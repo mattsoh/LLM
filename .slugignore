@@ -1,0 +1,20 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore virtual environment directories
+venv/
+.env/
+
+# Ignore large files
+model.pth
+
+# Ignore other files that don't need to be in the slug
+*.md
+*.txt
+*.log
+*.gitignore
+LICENSE
+data/
