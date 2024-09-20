@@ -17,9 +17,8 @@ GPT_CONFIG = {
     "qkv_bias": False
 }
 
-MODEL_PATH = "model.pth"
 FILE_ID = "1mkhifEI6HQoiVahnGgZaRYsVU23req_M"
-
+MODEL_PATH = "model.pth"
 if not os.path.exists(MODEL_PATH):
     try:
         print("Downloading model.pth from Google Drive...")
@@ -30,31 +29,12 @@ if not os.path.exists(MODEL_PATH):
         print(f"Error downloading model.pth: {e}")
 else:
     print("model.pth already exists.")
-
-device = device("cpu")
+device = torch.device("cpu")
 model = GPT(GPT_CONFIG)
 model.to(device)
 model.load_state_dict(load(MODEL_PATH, map_location=device, weights_only=True))
 tokenizer = get_encoding("gpt2")
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        start_context = request.form['start_context']
-        result = generate_and_print_sample(model, tokenizer, device, start_context)
-        return render_template_string('''
-            <form method="post">
-                Start Context: <input type="text" name="start_context">
-                <input type="submit" value="Generate">
-            </form>
-            <p>{{ result }}</p>
-        ''', result=result)
-    return render_template_string('''
-        <form method="post">
-            Start Context: <input type="text" name="start_context">
-            <input type="submit" value="Generate">
-        </form>
-    ''')
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8000)))
+start_context = input("Start Context: ")
+result = generate_and_print_sample(model, tokenizer, device, start_context)
+print(result)
