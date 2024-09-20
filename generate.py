@@ -1,8 +1,11 @@
+from flask import Flask, request, render_template_string
 import torch
 import tiktoken
 import gdown
 import os
 from helper import generate_and_print_sample, GPT
+
+app = Flask(__name__)
 
 GPT_CONFIG = {
     "vocab_size": 50257,
@@ -16,7 +19,6 @@ GPT_CONFIG = {
 
 FILE_ID = "1mkhifEI6HQoiVahnGgZaRYsVU23req_M"
 MODEL_PATH = "model.pth"
-
 if not os.path.exists(MODEL_PATH):
     try:
         print("Downloading model.pth from Google Drive...")
