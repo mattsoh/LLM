@@ -14,9 +14,6 @@ GPT_CONFIG = {
     "qkv_bias": False
 }
 
-MODEL_PATH = "model.pth"
-
-
 FILE_ID = "1mkhifEI6HQoiVahnGgZaRYsVU23req_M"
 MODEL_PATH = "model.pth"
 
@@ -28,11 +25,14 @@ if not os.path.exists(MODEL_PATH):
         print("Download completed.")
     except Exception as e:
         print(f"Error downloading model.pth: {e}")
-    
+else:
+    print("model.pth already exists.")
 device = torch.device("cpu")
 model = GPT(GPT_CONFIG)
 model.to(device)
 model.load_state_dict(torch.load(MODEL_PATH, map_location=device, weights_only=True))
-START_CONTEXT = "Every day is a new day"
 tokenizer = tiktoken.get_encoding("gpt2")
-generate_and_print_sample(model, tokenizer, device, START_CONTEXT)
+
+start_context = input("Start Context: ")
+result = generate_and_print_sample(model, tokenizer, device, start_context)
+print(result)
