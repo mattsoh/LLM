@@ -1,9 +1,9 @@
 from flask import Flask, request, render_template_string
-import torch
-import tiktoken
-import gdown
+from torch import device, load
+from tiktoken import get_encoding
+from gdown import download
 import os
-from helper import generate_and_print_sample, GPT
+from helper_simple import generate_and_print_sample, GPT
 
 app = Flask(__name__)
 
@@ -23,7 +23,7 @@ if not os.path.exists(MODEL_PATH):
     try:
         print("Downloading model.pth from Google Drive...")
         url = f"https://drive.google.com/uc?id={FILE_ID}"
-        gdown.download(url, MODEL_PATH, quiet=False, verify=False)
+        download(url, MODEL_PATH, quiet=False, verify=False)
         print("Download completed.")
     except Exception as e:
         print(f"Error downloading model.pth: {e}")
@@ -32,8 +32,8 @@ else:
 device = torch.device("cpu")
 model = GPT(GPT_CONFIG)
 model.to(device)
-model.load_state_dict(torch.load(MODEL_PATH, map_location=device, weights_only=True))
-tokenizer = tiktoken.get_encoding("gpt2")
+model.load_state_dict(load(MODEL_PATH, map_location=device, weights_only=True))
+tokenizer = get_encoding("gpt2")
 
 start_context = input("Start Context: ")
 result = generate_and_print_sample(model, tokenizer, device, start_context)
