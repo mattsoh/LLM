@@ -164,3 +164,7 @@ cython_debug/
 model.pth
 
 helper.py
+
+.vscode
+
+.DS_Store
