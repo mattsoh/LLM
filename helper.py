@@ -212,8 +212,9 @@ def generate_and_print_sample(model, tokenizer, device, start_context):
     with torch.no_grad():
         token_ids = generate(model=model, idx=encoded, max_new_tokens=100, context_size=context_size)
         decoded_text = token_ids_to_text(token_ids, tokenizer)
-        print(decoded_text.replace("\n", " "))
+        # print(decoded_text.replace("\n", " "))
     model.train()
+    return decoded_text
 
 def assign(left, right):
     if left.shape != right.shape:
